@@ -44,7 +44,7 @@
       </v-btn>
       <v-badge bordered bottom color="green" dot offset-x="10" offset-y="10">
         <v-avatar size="40">
-          <v-img src="../Images/Nghia.jpg"></v-img>
+          <v-img src="../Images/angry.png"></v-img>
         </v-avatar>
       </v-badge>
     </v-app-bar>
