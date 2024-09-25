@@ -91,31 +91,31 @@
           </v-dialog>
           <v-btn tile color="error" class="ml-2">
             <v-icon left>mdi-heart</v-icon>
-            Ưu thích
+            Thêm vào Danh sách yêu thích
           </v-btn>
-<!--          <v-dialog v-model="ticketDialog" max-width="800px">-->
-<!--            <template v-slot:activator="{on, attrs}">-->
-<!--              <v-btn tile color="error" v-bind="attrs" v-on="on" class="ml-2">-->
-<!--                Đặt vé-->
-<!--              </v-btn>-->
-<!--            </template>-->
-<!--            <v-card>-->
-<!--              <v-card-title>-->
-<!--                <span class="headline">Đặt vé - {{ this.movie.title }}</span>-->
-<!--              </v-card-title>-->
-<!--              <v-card-text>-->
+          <v-dialog v-model="ticketDialog" max-width="800px">
+            <template v-slot:activator="{on, attrs}">
+              <v-btn tile color="error" v-bind="attrs" v-on="on" class="ml-2">
+                Đặt vé
+              </v-btn>
+            </template>
+            <v-card>
+              <v-card-title>
+                <span class="headline">Đặt vé - {{ this.movie.title }}</span>
+              </v-card-title>
+              <v-card-text>
 
-<!--              </v-card-text>-->
-<!--              <v-card-actions>-->
-<!--                <v-spacer></v-spacer>-->
-<!--                <v-btn color="primary" text @click="ticketDialog = false">Hủy</v-btn>-->
-<!--                &lt;!&ndash; Thay đổi từ việc gọi phương thức `confirmBooking` sang chuyển hướng đến trang mới &ndash;&gt;-->
-<!--                <router-link :to="{ name: 'SelectCinemas' }">-->
-<!--                  <v-btn color="primary" text>Xác nhận đặt vé</v-btn>-->
-<!--                </router-link>-->
-<!--              </v-card-actions>-->
-<!--            </v-card>-->
-<!--          </v-dialog>-->
+              </v-card-text>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="primary" text @click="ticketDialog = false">Hủy</v-btn>
+                <!-- Thay đổi từ việc gọi phương thức `confirmBooking` sang chuyển hướng đến trang mới -->
+                <router-link :to="{ name: 'SelectCinemas' }">
+                  <v-btn color="primary" text>Xác nhận đặt vé</v-btn>
+                </router-link>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
 
 
         </v-col>
