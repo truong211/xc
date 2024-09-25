@@ -68,6 +68,9 @@
 
 <script>
 export default {
+  head: {
+    title: 'Đặt vé',
+  },
   data() {
     return {
 
@@ -192,6 +195,8 @@ export default {
   },
   mounted() {
     this.getCurrentPosition();
+    document.title = 'Đặt vé hdjáhdjhạhdjhạdhjáhdjáhj'
+
   }
 };
 </script>

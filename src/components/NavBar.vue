@@ -9,7 +9,7 @@
     </v-system-bar>
     -->
     <v-app-bar app color="white" dark>
-      <img src="../Images/logoBate.png" height="100" />
+      <img src="../Images/logoBate.png" height="100"/>
 
       <v-btn style="color: black" text class="ml-2" to="/">Phim</v-btn>
       <v-btn style="color: black" text class="ml-2" to="/actors">Diễn viên</v-btn>
@@ -42,21 +42,98 @@
           <v-icon color="black">far fa-bell</v-icon>
         </v-badge>
       </v-btn>
-      <v-badge bordered bottom color="green" dot offset-x="10" offset-y="10">
-        <v-avatar size="40">
-          <v-img src="../Images/angry.png"></v-img>
-        </v-avatar>
-      </v-badge>
+      <v-menu offset-y>
+        <template v-slot:activator="{ on, attrs }">
+          <div
+              v-bind="attrs"
+              v-on="on"
+              class="d-flex align-center"
+          >
+            <v-avatar size="38">
+              <v-img src="../Images/angry.png"></v-img>
+            </v-avatar>
+          </div>
+        </template>
+        <v-list dense style="min-width: 300px !important">
+          <v-list-item
+              class="d-flex align-center"
+          >
+            <v-list-item-title class="ml-1"
+            >Tài khoản</v-list-item-title
+            >
+          </v-list-item>
+          <v-list-item class="d-flex align-center">
+            <v-list-item-icon class="mx-0">
+              <v-icon size="23">mdi-account</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title class="ml-1">{{ username ?? 'Phạm Phương Hùng' }}
+              <v-icon style="cursor: pointer;" @click="setActionUpdateUser">mdi-pencil-outline</v-icon>
+            </v-list-item-title>
+          </v-list-item>
+          <v-list-item
+              class="d-flex align-center"
+          >
+            <v-list-item-icon class="mx-0">
+              <v-icon size="23">mdi-cash</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title class="ml-1"
+            >Tài khoản chính: {{
+                money > 0 ? $formatMoney({amount: money}) : 0
+              }} VND
+            </v-list-item-title
+            >
+          </v-list-item>
+          <v-list-item
+              class="d-flex align-center"
+          >
+            <v-list-item-icon class="mx-0">
+              <v-icon size="23">mdi-cash-multiple</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title class="ml-1">
+              <a style="color: rgba(0, 0, 0, 0.87)!important;" @click="setActionReferral"> Tài khoản thưởng: {{
+                  money_sub > 0 ? $formatMoney({amount: money_sub}) : 0
+                }} VND</a>
+            </v-list-item-title
+            >
+          </v-list-item>
+          <v-divider class="primary"></v-divider>
+          <v-list-item
+              @click="toggleChangePass"
+              class="d-flex align-center"
+          >
+            <v-list-item-icon class="mx-0">
+              <v-icon size="23">mdi-lock-reset</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title class="ml-1"
+            >Đổi mật khẩu</v-list-item-title
+            >
+          </v-list-item>
+          <v-list-item
+              @click="logout"
+              class="d-flex align-center"
+          >
+            <v-list-item-icon class="mx-0">
+              <v-icon size="23">mdi-logout</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title class="ml-1"
+            >Đăng xuất</v-list-item-title
+            >
+          </v-list-item>
+        </v-list>
+      </v-menu>
     </v-app-bar>
+
   </nav>
 </template>
 <script>
+
 export default {
   data: () => ({
     drawer: null,
     model: '',
     search: null,
-    movies: []
+    movies: [],
+    showProfileMenu: false,
   }),
   mounted() {
     this.loadMovies();
