@@ -7,9 +7,15 @@ import ActorDetail from '../components/ActorDetail.vue'
 import SelectCinemas from "../components/SelectCinemas.vue";
 import SelectCinemasV2 from "../components/SelectCinemas-v2.vue";
 import SeatSelection from "../components/SeatSelection.vue";
+import Login from "../pages/Login.vue";
 Vue.use(VueRouter)
 
 const routes = [
+  {
+    path:"/login",
+    name: "login",
+    component: Login
+  },
   {
     path: '/',
     name: 'Home',
