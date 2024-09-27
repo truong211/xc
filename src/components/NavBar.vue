@@ -77,22 +77,7 @@
               <v-icon size="23">mdi-cash</v-icon>
             </v-list-item-icon>
             <v-list-item-title class="ml-1"
-            >Tài khoản chính: {{
-                money > 0 ? $formatMoney({amount: money}) : 0
-              }} VND
-            </v-list-item-title
-            >
-          </v-list-item>
-          <v-list-item
-              class="d-flex align-center"
-          >
-            <v-list-item-icon class="mx-0">
-              <v-icon size="23">mdi-cash-multiple</v-icon>
-            </v-list-item-icon>
-            <v-list-item-title class="ml-1">
-              <a style="color: rgba(0, 0, 0, 0.87)!important;" @click="setActionReferral"> Tài khoản thưởng: {{
-                  money_sub > 0 ? $formatMoney({amount: money_sub}) : 0
-                }} VND</a>
+            >Tài khoản chính:
             </v-list-item-title
             >
           </v-list-item>
@@ -134,11 +119,16 @@ export default {
     search: null,
     movies: [],
     showProfileMenu: false,
+    username: 'Phạm Phương Hùng',
   }),
   mounted() {
     this.loadMovies();
   },
   methods: {
+    setActionUpdateUser() {
+    },
+    toggleChangePass(){},
+    logout(){},
     loadMovies: async function () {
       try {
         const response = await this.$http.get("/movie/popular");
