@@ -129,7 +129,10 @@ export default {
     setActionUpdateUser() {
     },
     toggleChangePass(){},
-    logout(){},
+    logout(){
+      this.$cookies.remove('session_id')
+      this.$router.push('/login')
+    },
     loadMovies: async function () {
       try {
         const response = await this.$http.get("/movie/popular");
