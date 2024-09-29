@@ -68,15 +68,5 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
-router.beforeEach((to, from, next) => {
-  const publicPages = ['/login'];
-  const authRequired = !publicPages.includes(to.path);
-  const loggedIn = !!Vue.$cookies.get('session_id');
 
-  if (authRequired && !loggedIn) {
-    return next('/login');
-  }
-
-  next();
-})
 export default router
