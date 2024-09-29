@@ -45,8 +45,11 @@
         </v-card>
       </v-col>
     </v-main>
-    <v-snackbar top color="green" v-model="snackbar">
-      Login success
+    <v-snackbar top right color="green" v-model="loginSuccessfulSnackbar">
+      Đăng nhập thành công!
+    </v-snackbar>
+    <v-snackbar top right color="red" v-model="loginFailedSnackbar">
+      Đăng nhập thất bại
     </v-snackbar>
   </v-app>
 </template>
@@ -58,7 +61,8 @@ export default {
 
   data: () => ({
     loading:false,
-    snackbar:false,
+    loginSuccessfulSnackbar: false,
+    loginFailedSnackbar: false,
     passwordShow:false,
     email: '',
     emailRules: [
@@ -89,13 +93,62 @@ export default {
         console.log(e)
       }
     },
+    async createSession(){
+      try {
+        const response = await this.$http.post('authentication/session/new',{
+          request_token: this.requestToken
+        })
+        if(response.status === 200 && response.data.success === true){
+          this.$cookies.remove('request_token')
+          this.$cookies.set('session_id', response.data.session_id)
+          await this.getAccountID()
+          await this.$router.push({name: 'Home'})
+        }
+      }
+      catch (e){
+        console.log(e)
+      }
+    },
+    async getAccountID(){
+      try{
+        const response = await this.$http.get('account',{
+          params:{
+            session_id: this.$cookies.get('session_id')
+          }
+        })
+        if(response.status === 200){
+          this.$cookies.set('accountId', response.data.id)
+        }
+      }catch (e){
+        console.log(e)
+      }
+    },
+    async validateRequestToken(){
+      try {
+        if(!this.$cookies.get('request_token')){
+          await this.getNewRequestToken()
+        }
+        const response = await this.$http.post('authentication/token/validate_with_login',{
+          username: this.email,
+          password: this.password,
+          request_token: this.requestToken
+        })
+        if(response.status === 200 && response.data.success === true){
+          await this.createSession()
+          this.loginSuccessfulSnackbar = true
+        }
+      }
+      catch (e){
+        this.loginFailedSnackbar = true
+      }
+    },
     submitHandler(){
       if (this.$refs.form.validate()){
         this.loading = true
+        this.validateRequestToken()
         setTimeout(()=> {
           this.loading = false
-          this.snackbar = true
-        },3000)
+        },100)
       }
     }
   }
