@@ -37,7 +37,8 @@
           <v-btn style="color:black;" text :to="`/movie/${item.id}`">{{ item.title }}</v-btn>
         </template>
       </v-autocomplete>
-      <v-btn icon>
+      <v-btn icon
+      >
         <v-badge color="green" content="2" overlap>
           <v-icon color="black">far fa-bell</v-icon>
         </v-badge>
